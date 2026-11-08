@@ -48,8 +48,17 @@ def download_youtube(url, dest_dir):
            "--merge-output-format", "mp4",
            "--max-filesize", "300M",
            "--no-playlist",
-           "-o", out_tmpl,
-           url]
+           "-o", out_tmpl]
+    # yt-dlp needs a JS runtime for full YouTube extraction; the
+    # Streamlit Cloud image has none by default (only deno is enabled,
+    # and it is not installed), which made downloads fail with
+    # "No supported JavaScript runtime" + HTTP 403. packages.txt
+    # installs nodejs — point yt-dlp at it when it is present.
+    # (CLI equivalent of the Python-API option
+    # 'js_runtimes': {'node': {}}.)
+    if shutil.which("node"):
+        cmd += ["--js-runtimes", "node"]
+    cmd.append(url)
     r = subprocess.run(cmd, capture_output=True, text=True, timeout=1200)
     candidates = sorted(Path(dest_dir).glob("source.*"))
     candidates = [c for c in candidates if c.suffix != ".part"]
