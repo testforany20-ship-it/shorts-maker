@@ -1,1 +1,10 @@
 ffmpeg
+pkg-config
+build-essential
+libavformat-dev
+libavcodec-dev
+libavdevice-dev
+libavutil-dev
+libswscale-dev
+libswresample-dev
+libavfilter-dev
