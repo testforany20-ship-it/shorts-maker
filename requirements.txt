@@ -1,0 +1,11 @@
+# Shorts Maker — Streamlit Community Cloud dependencies.
+# streamlit is left unpinned: Streamlit Cloud resolves the latest stable
+# itself. (Verified locally 2026-11-08: streamlit 1.67.0 installed into
+# the project venv and streamlit_app.py import-tested against it.)
+streamlit
+# Phase-0-proven pins — do not drop av==13.1.0 (faster-whisper 1.2.1
+# breaks with av 19.x) or ctranslate2==4.8.5.
+faster-whisper==1.2.1
+av==13.1.0
+ctranslate2==4.8.5
+yt-dlp
